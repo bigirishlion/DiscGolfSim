@@ -9,9 +9,9 @@ namespace DiscGolfSim
     public class Game
     {
         public List<Player> Players { get; set; }
+        public int CurrentHole { get; set; }
         private int _holesAmount { get; set; }
         private List<Hole> _holesList { get; set; }
-        private int _currentHole { get; set; }
         private Random _random;
 
         public Game(List<Player> players, int holesAmount)
@@ -23,27 +23,20 @@ namespace DiscGolfSim
 
             Players = players;
             _holesAmount = holesAmount;
+            Play();
+        }
 
+        public void Play()
+        {
             for (int i = 1; i < _holesAmount + 1; i++)
             {
-                _currentHole = i;
-                PlayHole();
+                CurrentHole = i; 
+                foreach (var player in Players)
+                {
+                    var hole = _holesList.FirstOrDefault(h => h.HoleNumber == CurrentHole);
+                    hole.PlayHole(player);
+                }
             }
-        }
-
-        private void PlayHole()
-        {
-            foreach (var player in Players)
-            {
-                takeTurn(player);
-            }
-        }
-
-        private void takeTurn(Player player)
-        {            
-            Disc disc = new Disc();
-            disc.Throw(player, _currentHole, _holesList, _random);
-            // TODO display stroke information
         }
 
         public string DisplayResults()

@@ -17,5 +17,12 @@ namespace DiscGolfSim
         {
             this.Name = playerName;
         }
+
+        public void ThrowDisc(int footage)
+        {
+            Disc disc = new Disc();
+            // what am i doing wrong here
+            this.Strokes += disc.SimulateFlight(footage);
+        }
     }
 }
