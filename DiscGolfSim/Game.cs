@@ -19,7 +19,7 @@ namespace DiscGolfSim
             _random = new Random();
             Course course = new Course("Pine Ridge", 18);
 
-            _holesList = course.GetCourseHoles(_random);
+            _holesList = course.generateCourseHoles(_random);
 
             Players = players;
             _holesAmount = holesAmount;
@@ -34,7 +34,7 @@ namespace DiscGolfSim
                 foreach (var player in Players)
                 {
                     var hole = _holesList.FirstOrDefault(h => h.HoleNumber == CurrentHole);
-                    hole.PlayHole(player);
+                    hole.PlayHole(player, _random);
                 }
             }
         }
@@ -48,7 +48,14 @@ namespace DiscGolfSim
             {
                 sb.Append("<p>");
                 sb.Append(player.Name + " Score: " + player.Strokes);
-                sb.Append("</p>");
+                sb.Append("</p>");                
+                foreach (var item in player.ThrowDistances)
+                {
+                    sb.Append(item.Key);
+                    sb.Append(", Throw distance: ");
+                    sb.Append(item.Value);
+                    sb.Append("<br>");
+                }
             }
             var winner = Players.OrderBy(p => p.Strokes).FirstOrDefault();
             sb.Append("<p>");

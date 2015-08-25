@@ -27,7 +27,7 @@ namespace DiscGolfSim
             players.Add(player1);
             players.Add(player2);
 
-            Game game = new Game(players,6);
+            Game game = new Game(players,3);
             resultLabel.Text = game.DisplayResults();
         }
     }

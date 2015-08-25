@@ -10,6 +10,7 @@ namespace DiscGolfSim
         public string Name { get; set; }
         public int Strokes { get; set; }
         public int Level { get; set; }
+        public Dictionary<string, int> ThrowDistances = new Dictionary<string, int>();
 
         public Player() {}
 
@@ -18,11 +19,10 @@ namespace DiscGolfSim
             this.Name = playerName;
         }
 
-        public void ThrowDisc(int footage)
+        public int ThrowDisc(Random randomDistance)
         {
-            Disc disc = new Disc();
-            // what am i doing wrong here
-            this.Strokes += disc.SimulateFlight(footage);
+            Disc disc = new Disc() { MinDistance = 25, MaxDistance = 175};
+            return disc.SimulateFlight(randomDistance);
         }
     }
 }

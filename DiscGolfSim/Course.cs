@@ -18,13 +18,13 @@ namespace DiscGolfSim
             this._totalHoles = totalHoles;
         }
 
-        public List<Hole> GetCourseHoles(Random random)
+        public List<Hole> generateCourseHoles(Random random)
         {
             _random = random;
             List<Hole> holeList = new List<Hole>();
             for (int i = 1; i < _totalHoles + 1; i++)
             {
-                Hole hole = new Hole() { HoleNumber = i, Footage = _random.Next(275, 601) };
+                Hole hole = new Hole() { HoleNumber = i, Footage = _random.Next(275, 450) };
                 holeList.Add(hole);
             }
             return holeList;
